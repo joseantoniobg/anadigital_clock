@@ -40,19 +40,17 @@ function drawClockPoint(countPoints, deg, value, className, space, left, width, 
   clock.appendChild(clockPointDiv);
 }
 
-let lastMinute = -1;
-let lastHour = -1;
+let lastMinute = new Date().getMinutes();
+let lastHour = new Date().getHours();
 
 function draw() {
   const d = new Date();
   clock.innerHTML = '';
 
-  lastMinute = lastMinute === -1 ? d.getMinutes() : lastMinute;
-  lastHour = lastHour === -1 ? d.getHours() : lastHour;
-
   drawClockPoint(2, degHours, d.getHours(), 'hour-cell', 48.5, 290, 40, (d.getMinutes() * 60 + d.getSeconds()) / 3600, hourInterval);
   drawClockPoint(1, degMinutes, d.getMinutes(), 'minute-cell', 42, 295, 30, d.getSeconds() / 60, minuteInterval);
   drawClockPoint(0, degSecs, d.getSeconds(), 'second-cell', 43, 300, 20, 0, 1);
+
   lastMinute = d.getMinutes();
   lastHour = d.getHours();
 }
